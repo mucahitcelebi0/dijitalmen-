@@ -139,23 +139,12 @@ const Cart = ({ isOpen, onClose, items, total, onRemove, onUpdateQuantity }) => 
                       <input type="radio" name="paymentType" value="Nakit" checked={formData.paymentType === 'Nakit'} onChange={handleInputChange} />
                       Nakit
                     </label>
-                    <label className={formData.paymentType === 'Kredi Kartı' ? 'active' : ''}>
-                      <input type="radio" name="paymentType" value="Kredi Kartı" checked={formData.paymentType === 'Kredi Kartı'} onChange={handleInputChange} />
-                      Kredi Kartı
-                    </label>
-                    <label className={formData.paymentType === 'Havale/EFT' ? 'active' : ''}>
-                      <input type="radio" name="paymentType" value="Havale/EFT" checked={formData.paymentType === 'Havale/EFT'} onChange={handleInputChange} />
-                      Havale/EFT
+                    <label className={formData.paymentType === 'Kapıda Ödeme' ? 'active' : ''}>
+                      <input type="radio" name="paymentType" value="Kapıda Ödeme" checked={formData.paymentType === 'Kapıda Ödeme'} onChange={handleInputChange} />
+                      Kapıda Ödeme
                     </label>
                   </div>
                 </div>
-
-                {formData.paymentType === 'Havale/EFT' && (
-                  <div className="info-box animate-slide-down">
-                    <p><strong>Banka Bilgileri (Sushi Nova)</strong></p>
-                    <p>TR99 0000 0000 0000 0000 0000 00</p>
-                  </div>
-                )}
 
                 <div className="form-group">
                   <label>Sipariş Notu</label>
