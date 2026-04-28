@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <footer className="site-footer">
       <div className="footer-container">
-        <h3 className="footer-title">SUSHİNOVA</h3>
+        <h3 className="footer-title">SUSHINOVA</h3>
         <p className="footer-address">
           Küçükbakkalköy, Ali Ay Sk. No:5/C, 34750 Ataşehir/İstanbul
         </p>
