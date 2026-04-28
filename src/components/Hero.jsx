@@ -4,7 +4,7 @@ import './Hero.css';
 const sliderData = [
   {
     image: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&q=80&w=1600',
-    title: 'Gerçek Japon Lezzeti',
+    title: 'Gerçek Asya Lezzeti',
     subtitle: 'Taptaze malzemeler, usta ellerden sushiler.'
   },
   {
