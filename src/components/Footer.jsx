@@ -17,7 +17,7 @@ const Footer = () => {
           <a href={mapUrl} target="_blank" rel="noopener noreferrer" className="footer-btn">
             Yol Tarifi
           </a>
-          <a href="tel:05555555555" className="footer-btn primary">
+          <a href="tel:05340576558" className="footer-btn primary">
             Arayarak Sipariş Ver
           </a>
         </div>
