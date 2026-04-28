@@ -8,6 +8,12 @@
   margin-bottom: var(--spacing-xl);
 }
 
+@media (max-width: 768px) {
+  .category-nav {
+    position: static;
+  }
+}
+
 .category-list {
   display: flex;
   flex-wrap: wrap;
