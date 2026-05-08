@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './index.css';
-import { categories, menuItems } from './data';
+import { categories as staticCategories, menuItems as staticItems } from './data';
+import { subscribeCategories, subscribeMenuItems } from './services/menuService';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import CategoryNav from './components/CategoryNav';
@@ -9,33 +10,67 @@ import Cart from './components/Cart';
 import Footer from './components/Footer';
 
 function App() {
-  const [activeCategory, setActiveCategory] = useState(categories[0].id);
+  const [categories, setCategories] = useState(staticCategories);
+  const [menuItems, setMenuItems] = useState(staticItems);
+  const [activeCategory, setActiveCategory] = useState(staticCategories[0]?.id ?? null);
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [toast, setToast] = useState(null);
+  const activeCatRef = useRef(null);
+
+  useEffect(() => {
+    activeCatRef.current = activeCategory;
+  }, [activeCategory]);
+
+  useEffect(() => {
+    let unsubCats = () => {};
+    let unsubItems = () => {};
+
+    try {
+      unsubCats = subscribeCategories((cats) => {
+        if (cats.length > 0) {
+          setCategories(cats);
+          if (!activeCatRef.current || !cats.find((c) => c.id === activeCatRef.current)) {
+            setActiveCategory(cats[0].id);
+          }
+        }
+      });
+      unsubItems = subscribeMenuItems((items) => {
+        if (items.length > 0) {
+          setMenuItems(items);
+        }
+      });
+    } catch {
+      // Firebase not configured; staticCategories/staticItems remain (used as fallback).
+    }
+
+    return () => {
+      unsubCats();
+      unsubItems();
+    };
+  }, []);
 
   const addToCart = (item) => {
     setCart((prevCart) => {
       const existing = prevCart.find((i) => i.id === item.id);
       if (existing) {
-        return prevCart.map((i) => 
+        return prevCart.map((i) =>
           i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
         );
       }
       return [...prevCart, { ...item, quantity: 1 }];
     });
-    
-    // Show Toast
+
     setToast(`${item.name} sepete eklendi!`);
     setTimeout(() => setToast(null), 2500);
   };
 
   const removeFromCart = (itemId) => {
-    setCart((prevCart) => prevCart.filter(i => i.id !== itemId));
+    setCart((prevCart) => prevCart.filter((i) => i.id !== itemId));
   };
 
   const updateQuantity = (itemId, change) => {
-    setCart((prevCart) => prevCart.map(i => {
+    setCart((prevCart) => prevCart.map((i) => {
       if (i.id === itemId) {
         const newQty = i.quantity + change;
         return newQty > 0 ? { ...i, quantity: newQty } : i;
@@ -44,8 +79,8 @@ function App() {
     }));
   };
 
-  const filteredItems = menuItems.filter(item => item.categoryId === activeCategory);
-  
+  const filteredItems = menuItems.filter((item) => item.categoryId === activeCategory);
+
   const cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -53,18 +88,18 @@ function App() {
     <div className="app-container">
       <Header cartItemCount={cartItemCount} onCartClick={() => setIsCartOpen(true)} />
       <Hero />
-      
+
       <main className="menu-sections">
-        <CategoryNav 
-          categories={categories} 
-          activeCategory={activeCategory} 
-          onSelectCategory={setActiveCategory} 
+        <CategoryNav
+          categories={categories}
+          activeCategory={activeCategory}
+          onSelectCategory={setActiveCategory}
         />
-        
+
         <MenuList items={filteredItems} onAddToCart={addToCart} />
       </main>
 
-      <Cart 
+      <Cart
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
         items={cart}
@@ -73,8 +108,7 @@ function App() {
         onUpdateQuantity={updateQuantity}
       />
       <Footer />
-      
-      {/* Toast Notification */}
+
       <div className={`toast-container ${toast ? 'show' : ''}`}>
         {toast && (
           <div className="toast-message">
