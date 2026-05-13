@@ -29,6 +29,24 @@
   line-height: 1.5;
 }
 
+.footer-tagline {
+  font-size: 0.95rem;
+  color: var(--color-text-dim);
+  margin-top: -8px;
+}
+
+.footer-hours {
+  font-size: 0.9rem;
+  color: var(--color-text-dim);
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: var(--color-text-dim);
+  margin-top: var(--spacing-md);
+  opacity: 0.7;
+}
+
 .footer-actions {
   display: flex;
   gap: var(--spacing-sm);

@@ -1,0 +1,18 @@
+# SushiNOVA - robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+
+# Googlebot için özel izin
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+
+# Bingbot
+User-agent: Bingbot
+Allow: /
+Disallow: /admin
+
+# Sitemap
+Sitemap: https://sushinova.com.tr/sitemap.xml

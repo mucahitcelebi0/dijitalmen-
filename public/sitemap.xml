@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://sushinova.com.tr/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="tr-TR" href="https://sushinova.com.tr/" />
+    <image:image>
+      <image:loc>https://sushinova.com.tr/og-image.jpg</image:loc>
+      <image:title>SushiNOVA Ataşehir Sushi</image:title>
+      <image:caption>SushiNOVA - Küçükbakkalköy Ataşehir Sushi &amp; Gel-Al</image:caption>
+    </image:image>
+  </url>
+</urlset>
